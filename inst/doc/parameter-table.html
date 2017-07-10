@@ -12,7 +12,7 @@
 
 <meta name="author" content="Tim Bergsma" />
 
-<meta name="date" content="2017-04-20" />
+<meta name="date" content="2017-07-10" />
 
 <title>Creating a Nonmem Parameter Table</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Creating a Nonmem Parameter Table</h1>
 <h4 class="author"><em>Tim Bergsma</em></h4>
-<h4 class="date"><em>2017-04-20</em></h4>
+<h4 class="date"><em>2017-07-10</em></h4>
 
 
 
@@ -184,22 +184,22 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <h2>Customizing Your Parameter Table</h2>
 <p>By default, the parameter table looks like this (but if bootstraps can’t be found, the <code>ci</code> columm will be missing).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partab</span>(<span class="dv">1001</span>)</code></pre></div>
-<pre><code>##      parameter estimate  prse                 ci   symbol
-## 1     theta_01     9.51  9.82       (7.24, 11.2)     CL/F
-## 2     theta_02     22.8  9.56       (19.7, 25.4)     Vc/F
-## 3     theta_03   0.0714  7.35   (0.0646, 0.0803)       Ka
-## 4     theta_04     3.47  15.4       (3.02, 4.59)      Q/F
-## 5     theta_05      113    21        (90.5, 380)     Vp/F
-## 6     theta_06     1.02  11.1        (0.88, 1.3)  MALE_CL
-## 7     theta_07     1.19  28.3       (0.53, 1.73)    WT_CL
-## 8  omega_01_01    0.214  22.8     (0.151, 0.319)   IIV_CL
-## 9  omega_02_01    0.121  26.4                        CL_V
-## 10 omega_02_02   0.0945  33.2      (0.07, 0.179)   IIV_Vc
-## 11 omega_03_01  -0.0116  -173                       CL_Ka
-## 12 omega_03_02  -0.0372 -36.1                       Vc_Ka
-## 13 omega_03_03   0.0466  34.7    (0.0475, 0.146)   IIV_Ka
-## 14 sigma_01_01   0.0492    11   (-0.039, 0.0165) ERR_PROP
-## 15 sigma_02_02    0.202  33.5 (-0.0512, -0.0097)  ERR_ADD
+<pre><code>##      parameter estimate prse                 ci   symbol
+## 1     theta_01     9.51 9.82       (7.24, 11.2)     CL/F
+## 2     theta_02     22.8 9.56       (19.7, 25.4)     Vc/F
+## 3     theta_03   0.0714 7.35   (0.0646, 0.0803)       Ka
+## 4     theta_04     3.47 15.4       (3.02, 4.59)      Q/F
+## 5     theta_05      113   21        (90.5, 380)     Vp/F
+## 6     theta_06     1.02 11.1        (0.88, 1.3)  MALE_CL
+## 7     theta_07     1.19 28.3       (0.53, 1.73)    WT_CL
+## 8  omega_01_01    0.214 22.8     (0.151, 0.319)   IIV_CL
+## 9  omega_02_01    0.121 26.4                        CL_V
+## 10 omega_02_02   0.0945 33.2      (0.07, 0.179)   IIV_Vc
+## 11 omega_03_01  -0.0116  173                       CL_Ka
+## 12 omega_03_02  -0.0372 36.1                       Vc_Ka
+## 13 omega_03_03   0.0466 34.7    (0.0475, 0.146)   IIV_Ka
+## 14 sigma_01_01   0.0492   11   (-0.039, 0.0165) ERR_PROP
+## 15 sigma_02_02    0.202 33.5 (-0.0512, -0.0097)  ERR_ADD
 ##                                            label unit
 ## 1                                      clearance  L/h
 ## 2                                 central volume    L
@@ -373,7 +373,7 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <tr class="odd">
 <td align="left">omega_03_01</td>
 <td align="left">-0.0116</td>
-<td align="left">-173</td>
+<td align="left">173</td>
 <td align="left"></td>
 <td align="left">CL_Ka</td>
 <td align="left">interindividual clearance-Ka covariance</td>
@@ -382,7 +382,7 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <tr class="even">
 <td align="left">omega_03_02</td>
 <td align="left">-0.0372</td>
-<td align="left">-36.1</td>
+<td align="left">36.1</td>
 <td align="left"></td>
 <td align="left">Vc_Ka</td>
 <td align="left">interindividual volume-Ka covariance</td>
@@ -512,14 +512,14 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <tr class="odd">
 <td align="right">omega_03_01</td>
 <td align="right">-0.0116</td>
-<td align="right">-173</td>
+<td align="right">173</td>
 <td align="right"></td>
 <td align="right">CL_Ka</td>
 </tr>
 <tr class="even">
 <td align="right">omega_03_02</td>
 <td align="right">-0.0372</td>
-<td align="right">-36.1</td>
+<td align="right">36.1</td>
 <td align="right"></td>
 <td align="right">Vc_Ka</td>
 </tr>
@@ -1044,7 +1044,7 @@ x</code></pre></div>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">-173</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">173</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
@@ -1079,7 +1079,7 @@ x</code></pre></div>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">-36.1</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">36.1</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
