@@ -1,4 +1,4 @@
-def932c069a17d49eebe3a6d63de6fd1 *DESCRIPTION
+5dc7397276cf2d7aa13443019f625abf *DESCRIPTION
 9a49997577a081c3f7b32fba4e23342d *NAMESPACE
 565669bd9c9ad0b47d9fed99b1cffb51 *R/bootstrap.R
 e7f1b6a864bc47dd689ae64662f1af01 *R/canonical.R
@@ -6,13 +6,13 @@ e7f1b6a864bc47dd689ae64662f1af01 *R/canonical.R
 efa7ae0497c99c7ede85d5aba4e30d26 *R/docx.R
 b5ca76dd837e8345e47aa40f9169dd09 *R/getset.R
 c7b3dddeec0c64157c277cba1a5874ed *R/halfmatrix.R
-9a7f6833fb291f4de1648cbc164ddfcc *R/init.R
+bc400e413b44744412149c07c5eb50f8 *R/init.R
 66d6f1cc4f892dc224abfe59712f8ab3 *R/likebut.R
 23388628ccd5518e9e5efcb9a3c554fd *R/model.R
 309caa6fb6c58742ed8cd8557c92f8ee *R/nonmemica.R
 4efda43ca5e9a4617a015978c17e28d9 *R/partab.R
 7708c733fb2e64e90bf17f0fe330f3e8 *R/path.R
-cc0e4b6c8a8682226e64ade66599ba06 *R/superset.R
+e9ec9532cb4a54b3614a460a850b15d5 *R/superset.R
 3a51b26b7b51a940826c4201480b8e45 *R/tad.R
 100ee6c7a4540f149c050ed9699a26f7 *R/util.R
 e0725ff222b9eda31df57d43dd629336 *R/xpath.R
@@ -20,7 +20,7 @@ e0725ff222b9eda31df57d43dd629336 *R/xpath.R
 1038fe601603e7cf424047569bbbde7a *data/tad1.rdata
 3d691c179bd76df9e9f168255d7e1736 *inst/doc/parameter-table.R
 c8aaf23efff70fdcb246675512f79fbd *inst/doc/parameter-table.Rmd
-21a1557bbe6a518a4e42cd31175a6e00 *inst/doc/parameter-table.html
+7418d9bbf2b96d682a14c17880885912 *inst/doc/parameter-table.html
 f95206bf2c47cb8bc5138e8e4a056172 *inst/project/data/derived/drug.csv
 f7a00f8af96e6157cabcda41d4d7fb14 *inst/project/data/derived/drug.spec
 7ea54e49a571bb087d428af930db3f8a *inst/project/data/source/dem.csv
@@ -127,7 +127,7 @@ da1e1343a9aa7b605410bf0647d19297 *man/lower.model.Rd
 ae082e58638d1ded69acbf9100f9b5de *man/maxWidths.Rd
 5c78045c2de10b6c8b5d412453fe831c *man/maxWidths.list.Rd
 4dfbd6476c7f61f3b5d2b423ea622d36 *man/meta.Rd
-45f1c1c55a3a0af66cd6652cb0dcdf06 *man/meta.character.Rd
+417951068ffdc3302279aad53367ccf1 *man/meta.character.Rd
 bce0be52f52175ae0348ab231d047a54 *man/meta.numeric.Rd
 aec21d58e231be388576a6f6f9e7a5f6 *man/metaplot.character.Rd
 cb27feb90a1666cbd166d13fe6dd862c *man/metaplot.numeric.Rd
