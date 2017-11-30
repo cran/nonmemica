@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Tim Bergsma" />
 
-<meta name="date" content="2017-07-31" />
+<meta name="date" content="2017-11-30" />
 
 <title>Creating a Nonmem Parameter Table</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Creating a Nonmem Parameter Table</h1>
 <h4 class="author"><em>Tim Bergsma</em></h4>
-<h4 class="date"><em>2017-07-31</em></h4>
+<h4 class="date"><em>2017-11-30</em></h4>
 
 
 
@@ -168,13 +168,13 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <span class="kw">library</span>(nonmemica)
 <span class="kw">options</span>(<span class="dt">project =</span> <span class="kw">system.file</span>(<span class="st">'project/model'</span>,<span class="dt">package=</span><span class="st">'nonmemica'</span>))
 <span class="dv">1001</span> %&gt;%<span class="st"> </span>definitions %&gt;%<span class="st"> </span>head</code></pre></div>
-<pre><code>##       item  symbol                        label unit
-## 1 theta_01    CL/F                    clearance  L/h
-## 2 theta_02    Vc/F               central volume    L
-## 3 theta_03      Ka     absorption rate constant  1/h
-## 4 theta_04     Q/F intercompartmental clearance  L/h
-## 5 theta_05    Vp/F            peripheral volume    L
-## 6 theta_06 MALE_CL     male effect on clearance &lt;NA&gt;</code></pre>
+<pre><code>##       item symbol                        label unit
+## 1 theta_01   CL/F                    clearance  L/h
+## 2 theta_02   Vc/F               central volume    L
+## 3 theta_03     Ka     absorption rate constant  1/h
+## 4 theta_04    Q/F intercompartmental clearance  L/h
+## 5 theta_05   Vp/F            peripheral volume    L
+## 6 theta_06  WT_CL   weight effect on clearance &lt;NA&gt;</code></pre>
 <p>If you like, you can write out the defintions and edit them. You can change the file location or stick with the default. If you didn’t like exactly what was in the control stream, you can ignore it by passing a zero-length argument for ctlfile.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1001</span> %&gt;%<span class="st"> </span><span class="kw">definitions</span>(<span class="dt">write=</span>T)
 <span class="dv">1001</span> %&gt;%<span class="st"> </span><span class="kw">partab</span>(<span class="dt">ctlfile =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -190,8 +190,8 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 ## 3     theta_03   0.0714 7.35   (0.0646, 0.0803)       Ka
 ## 4     theta_04     3.47 15.4       (3.02, 4.59)      Q/F
 ## 5     theta_05      113   21        (90.5, 380)     Vp/F
-## 6     theta_06     1.02 11.1        (0.88, 1.3)  MALE_CL
-## 7     theta_07     1.19 28.3       (0.53, 1.73)    WT_CL
+## 6     theta_06     1.02 11.1        (0.88, 1.3)    WT_CL
+## 7     theta_07     1.19 28.3       (0.53, 1.73)  MALE_CL
 ## 8  omega_01_01    0.214 22.8     (0.151, 0.319)   IIV_CL
 ## 9  omega_02_01    0.121 26.4                        CL_V
 ## 10 omega_02_02   0.0945 33.2      (0.07, 0.179)   IIV_Vc
@@ -206,8 +206,8 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 ## 3                       absorption rate constant  1/h
 ## 4                   intercompartmental clearance  L/h
 ## 5                              peripheral volume    L
-## 6                       male effect on clearance &lt;NA&gt;
-## 7                     weight effect on clearance &lt;NA&gt;
+## 6                     weight effect on clearance &lt;NA&gt;
+## 7                       male effect on clearance &lt;NA&gt;
 ## 8       interindividual variability on clearance &lt;NA&gt;
 ## 9    interindividual clearance-volume covariance &lt;NA&gt;
 ## 10 interindividual variability on central volume &lt;NA&gt;
@@ -250,8 +250,8 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 ## 3        Ka                      absorption rate constant  1/h
 ## 4       Q/F                  intercompartmental clearance  L/h
 ## 5      Vp/F                             peripheral volume    L
-## 6   MALE_CL                      male effect on clearance &lt;NA&gt;
-## 7     WT_CL                    weight effect on clearance &lt;NA&gt;
+## 6     WT_CL                    weight effect on clearance &lt;NA&gt;
+## 7   MALE_CL                      male effect on clearance &lt;NA&gt;
 ## 8    IIV_CL      interindividual variability on clearance &lt;NA&gt;
 ## 9      CL_V   interindividual clearance-volume covariance &lt;NA&gt;
 ## 10   IIV_Vc interindividual variability on central volume &lt;NA&gt;
@@ -330,8 +330,8 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <td align="left">1.02</td>
 <td align="left">11.1</td>
 <td align="left">(0.88, 1.3)</td>
-<td align="left">MALE_CL</td>
-<td align="left">male effect on clearance</td>
+<td align="left">WT_CL</td>
+<td align="left">weight effect on clearance</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
@@ -339,8 +339,8 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <td align="left">1.19</td>
 <td align="left">28.3</td>
 <td align="left">(0.53, 1.73)</td>
-<td align="left">WT_CL</td>
-<td align="left">weight effect on clearance</td>
+<td align="left">MALE_CL</td>
+<td align="left">male effect on clearance</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -479,14 +479,14 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <td align="right">1.02</td>
 <td align="right">11.1</td>
 <td align="right">(0.88, 1.3)</td>
-<td align="right">MALE_CL</td>
+<td align="right">WT_CL</td>
 </tr>
 <tr class="odd">
 <td align="right">theta_07</td>
 <td align="right">1.19</td>
 <td align="right">28.3</td>
 <td align="right">(0.53, 1.73)</td>
-<td align="right">WT_CL</td>
+<td align="right">MALE_CL</td>
 </tr>
 <tr class="even">
 <td align="right">omega_01_01</td>
@@ -579,11 +579,11 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <td align="right">L</td>
 </tr>
 <tr class="even">
-<td align="right">male effect on clearance</td>
+<td align="right">weight effect on clearance</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
-<td align="right">weight effect on clearance</td>
+<td align="right">male effect on clearance</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
@@ -875,12 +875,12 @@ x</code></pre></div>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">MALE_CL</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">WT_CL</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">male effect on clearance</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">weight effect on clearance</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
@@ -911,12 +911,12 @@ x</code></pre></div>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">WT_CL</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">MALE_CL</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">weight effect on clearance</span>
+<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">male effect on clearance</span>
 </p>
 </td>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
@@ -1230,7 +1230,7 @@ x</code></pre></div>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
