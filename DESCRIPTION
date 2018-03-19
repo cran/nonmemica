@@ -1,7 +1,7 @@
 Package: nonmemica
 Type: Package
 Title: Create and Evaluate NONMEM Models in a Project Context
-Version: 0.7.9
+Version: 0.8.0
 Author: Tim Bergsma
 Maintainer: Tim Bergsma <bergsmat@gmail.com>
 Description: Systematically creates and modifies NONMEM(R) control streams. Harvests
@@ -10,12 +10,12 @@ Description: Systematically creates and modifies NONMEM(R) control streams. Harv
  nonlinear mixed effects modeling. See 'package?nonmemica'. 
 License: GPL-3
 LazyData: TRUE
-Imports: dplyr (>= 0.7.1), tidyr, xml2, encode, csv, fold (>= 0.2.1),
-        spec, lazyeval, metaplot (>= 0.1.4), magrittr, rlang
+Imports: dplyr (>= 0.7.1), tidyr, xml2, encode, csv, spec, lazyeval,
+        metaplot (>= 0.1.4), magrittr, rlang
 Suggests: ReporteRs, pander, knitr, wrangle
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-11-30 16:37:42 UTC; tbergsma
+Packaged: 2018-03-19 14:22:29 UTC; tbergsma
 Repository: CRAN
-Date/Publication: 2017-11-30 17:06:53 UTC
+Date/Publication: 2018-03-19 16:47:00 UTC
