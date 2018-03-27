@@ -1,4 +1,4 @@
-d3f122c16d92c8b24670653aa400426f *DESCRIPTION
+0028515e2bf4a11d9c68d35b093f1b9f *DESCRIPTION
 4c070ad1ec633f9133bbdf4d5be80749 *NAMESPACE
 565669bd9c9ad0b47d9fed99b1cffb51 *R/bootstrap.R
 e7f1b6a864bc47dd689ae64662f1af01 *R/canonical.R
@@ -20,7 +20,7 @@ e0725ff222b9eda31df57d43dd629336 *R/xpath.R
 1038fe601603e7cf424047569bbbde7a *data/tad1.rdata
 3d691c179bd76df9e9f168255d7e1736 *inst/doc/parameter-table.R
 c8aaf23efff70fdcb246675512f79fbd *inst/doc/parameter-table.Rmd
-26ff67d525a0ddf5b888d61af23d0beb *inst/doc/parameter-table.html
+a540ec220344d7ed2fbb3713915e59ba *inst/doc/parameter-table.html
 f95206bf2c47cb8bc5138e8e4a056172 *inst/project/data/derived/drug.csv
 f7a00f8af96e6157cabcda41d4d7fb14 *inst/project/data/derived/drug.spec
 7ea54e49a571bb087d428af930db3f8a *inst/project/data/source/dem.csv
