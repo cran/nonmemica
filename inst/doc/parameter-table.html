@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Tim Bergsma" />
 
-<meta name="date" content="2018-03-27" />
+<meta name="date" content="2018-03-28" />
 
 <title>Creating a Nonmem Parameter Table</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Creating a Nonmem Parameter Table</h1>
 <h4 class="author"><em>Tim Bergsma</em></h4>
-<h4 class="date"><em>2018-03-27</em></h4>
+<h4 class="date"><em>2018-03-28</em></h4>
 
 
 
@@ -106,7 +106,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Solution</h2>
 <p>The package <code>nonmemica</code> provides the function <code>partab</code> that creates a parameter table for a single NONMEM model. <code>partab</code> knows where the models live, because you explicitly pass a <code>project</code> argument or (if you are lazy like me) you set an option near the top of your script.</p>
 <p>Install and load <code>nonmemica</code> like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="dt">repos=</span><span class="ot">NULL</span>,<span class="st">'../nonmemica_0.1.zip'</span>) <span class="co"># supply your path and version</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'nonmemica'</span>)
 <span class="kw">library</span>(nonmemica)</code></pre></div>
 <p>Specify the project directory like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partab</span>(<span class="dv">1001</span>, <span class="dt">project=</span><span class="st">'../model'</span>)</code></pre></div>
@@ -164,8 +164,9 @@ IPRE          ; IPRED; individual prediction;      ng/mL
 CL            ; CLI;   posthoc systemic clearance; L/h
 ETA1          ; BSV_CL; clearance variability;</code></pre>
 <p>Of course, these won’t show up in a parameter table, but you’ll see them in a list of item definitions if you do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
-<span class="kw">library</span>(nonmemica)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)</code></pre></div>
+<pre><code>## Warning: package 'magrittr' was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nonmemica)
 <span class="kw">options</span>(<span class="dt">project =</span> <span class="kw">system.file</span>(<span class="st">'project/model'</span>,<span class="dt">package=</span><span class="st">'nonmemica'</span>))
 <span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>definitions <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
 <pre><code>##       item symbol                        label unit
@@ -418,8 +419,9 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 </tbody>
 </table>
 <p>You can also try <code>pander::pander</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
-<span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>(<span class="dt">justify=</span><span class="st">'right'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)</code></pre></div>
+<pre><code>## Warning: package 'pander' was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>(<span class="dt">justify=</span><span class="st">'right'</span>)</code></pre></div>
 <table style="width:88%;">
 <caption>Table continues below</caption>
 <colgroup>
@@ -620,599 +622,6 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 </tr>
 </tbody>
 </table>
-<p>If your target audience needs a Word doc, try making one using built-in support for <code>ReporteRs</code>. You can also make a FlexTable first, and then make arbitrary modifications.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ReporteRs)</code></pre></div>
-<pre><code>## Loading required package: ReporteRsjars</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span>as.docx <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.file</span>(<span class="st">'1001.docx'</span>)
-x &lt;-<span class="st"> </span><span class="kw">as.flextable</span>(<span class="kw">partab</span>(<span class="dv">1001</span>))
-x</code></pre></div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
-<thead>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">parameter</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">estimate</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">prse</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">ci</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">symbol</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">label</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;font-weight:bold;color:rgba(0, 0, 0, 1);">unit</span>
-</p>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_01</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">9.51</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">9.82</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(7.24, 11.2)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">CL/F</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">clearance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">L/h</span>
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_02</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">22.8</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">9.56</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(19.7, 25.4)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">Vc/F</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">central volume</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">L</span>
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_03</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.0714</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">7.35</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.0646, 0.0803)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">Ka</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">absorption rate constant</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">1/h</span>
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_04</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">3.47</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">15.4</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(3.02, 4.59)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">Q/F</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">intercompartmental clearance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">L/h</span>
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_05</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">113</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">21</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(90.5, 380)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">Vp/F</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">peripheral volume</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">L</span>
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_06</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">1.02</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">11.1</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.88, 1.3)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">WT_CL</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">weight effect on clearance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">theta_07</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">1.19</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">28.3</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.53, 1.73)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">MALE_CL</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">male effect on clearance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_01_01</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.214</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">22.8</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.151, 0.319)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">IIV_CL</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual variability on clearance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_02_01</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.121</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">26.4</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">CL_V</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual clearance-volume covariance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_02_02</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.0945</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">33.2</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.07, 0.179)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">IIV_Vc</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual variability on central volume</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_03_01</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">-0.0116</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">173</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">CL_Ka</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual clearance-Ka covariance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_03_02</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">-0.0372</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">36.1</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">Vc_Ka</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual volume-Ka covariance</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">omega_03_03</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.0466</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">34.7</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(0.0475, 0.146)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">IIV_Ka</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">interindividual variability on Ka</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">sigma_01_01</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.0492</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">11</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(-0.039, 0.0165)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">ERR_PROP</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">proportional error</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-<tr>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">sigma_02_02</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">0.202</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">33.5</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">(-0.0512, -0.0097)</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">ERR_ADD</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-<span style="font-size:11pt;font-family:Times New Roman;color:rgba(0, 0, 0, 1);">additive error</span>
-</p>
-</td>
-<td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
-<p style="text-align:left;padding-top:5pt;padding-bottom:5pt;padding-right:5pt;padding-left:5pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
-</p>
-</td>
-</tr>
-</tbody>
-<tfoot>
-</tfoot>
-</table>
 </div>
 <div id="getting-help" class="section level2">
 <h2>Getting Help</h2>
@@ -1230,7 +639,7 @@ x</code></pre></div>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

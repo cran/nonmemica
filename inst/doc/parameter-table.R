@@ -1,5 +1,5 @@
 ## ----eval=FALSE----------------------------------------------------------
-#  install.packages(repos=NULL,'../nonmemica_0.1.zip') # supply your path and version
+#  install.packages('nonmemica')
 #  library(nonmemica)
 
 ## ----echo=FALSE, results='hide'------------------------------------------
@@ -70,10 +70,4 @@ library(knitr)
 ## ------------------------------------------------------------------------
 library(pander)
 1001 %>% partab %>% pander(justify='right')
-
-## ------------------------------------------------------------------------
-library(ReporteRs)
-1001 %>% partab %>% as.docx %>% as.file('1001.docx')
-x <- as.flextable(partab(1001))
-x
 
