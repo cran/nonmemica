@@ -12,7 +12,7 @@
 
 <meta name="author" content="Tim Bergsma" />
 
-<meta name="date" content="2018-03-28" />
+<meta name="date" content="2018-09-29" />
 
 <title>Creating a Nonmem Parameter Table</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Creating a Nonmem Parameter Table</h1>
 <h4 class="author"><em>Tim Bergsma</em></h4>
-<h4 class="date"><em>2018-03-28</em></h4>
+<h4 class="date"><em>2018-09-29</em></h4>
 
 
 
@@ -164,9 +164,8 @@ IPRE          ; IPRED; individual prediction;      ng/mL
 CL            ; CLI;   posthoc systemic clearance; L/h
 ETA1          ; BSV_CL; clearance variability;</code></pre>
 <p>Of course, these won’t show up in a parameter table, but you’ll see them in a list of item definitions if you do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)</code></pre></div>
-<pre><code>## Warning: package 'magrittr' was built under R version 3.4.4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nonmemica)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(nonmemica)
 <span class="kw">options</span>(<span class="dt">project =</span> <span class="kw">system.file</span>(<span class="st">'project/model'</span>,<span class="dt">package=</span><span class="st">'nonmemica'</span>))
 <span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>definitions <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
 <pre><code>##       item symbol                        label unit
@@ -266,8 +265,9 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 <div id="rendering-your-parameter-table" class="section level2">
 <h2>Rendering Your Parameter Table</h2>
 <p>To some extent, the science of creating a parameter table is a separate issue from the aesthetics. How should you render the table for viewing by your audience? <code>nonmemica</code> is deliberately agnostic on this question, since there is no one right answer, and very many good ones. In an rmarkdown environment, consider <code>knitr::kable</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-<span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span>kable</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)</code></pre></div>
+<pre><code>## Warning: package 'knitr' was built under R version 3.5.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span>kable</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -420,7 +420,7 @@ ETA1          ; BSV_CL; clearance variability;</code></pre>
 </table>
 <p>You can also try <code>pander::pander</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)</code></pre></div>
-<pre><code>## Warning: package 'pander' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'pander' was built under R version 3.5.1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1001</span> <span class="op">%&gt;%</span><span class="st"> </span>partab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>(<span class="dt">justify=</span><span class="st">'right'</span>)</code></pre></div>
 <table style="width:88%;">
 <caption>Table continues below</caption>
