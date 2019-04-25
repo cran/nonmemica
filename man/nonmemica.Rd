@@ -165,11 +165,9 @@ datafile(1001) \%matches\% specfile(1001)
 
 \href{http://xpose.sourceforge.net/}{Xpose}
 
-\href{http://www.pirana-software.com/}{Pirana}
-
 \href{http://wfn.sourceforge.net/}{Wings for NONMEM}
 
-\href{https://github.com/MikeKSmith/rspeaksnonmem}{RsN}
+\href{https://github.com/MikeKSmith/rspeaksnonmem}{R speaks NONMEM}
 
 \href{https://r-forge.r-project.org/R/?group_id=1215}{metrumrg}
 }
