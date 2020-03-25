@@ -1,4 +1,4 @@
-0980047b1de8ab93bc0e557e48490b95 *DESCRIPTION
+33f3adb02c320bf7a1c7c3fd3a440703 *DESCRIPTION
 8e0c48f905f20187fb767e23e2da4c21 *NAMESPACE
 be3624082176b4758f8a9c736be7ac53 *R/bootstrap.R
 8e31348479834cf84c9b1ada69f5012a *R/canonical.R
@@ -9,17 +9,17 @@ f334389d90cf68a93b64c68490aae5ca *R/getset.R
 7a1747e26d39adb13299796eb91039fa *R/likebut.R
 912c87c8f6917a447c2a4f7bda9aecf0 *R/model.R
 1aa792c5ed3a1e61bca7890a2f3e4915 *R/nonmemica.R
-b3aadf68790c62dcbb219d196b5b6eea *R/partab.R
+bd7f745a6c966b773d25e76664909561 *R/partab.R
 1d658fb53f7ba2f2b78a1c5a00efa1c9 *R/path.R
 4f2e6ee9d3b9de45a50352c81bd3754c *R/superset.R
 afe4d26aa96bc749a02eaea4e3f3844e *R/tad.R
 5af831d7d617604271b6e263122361bc *R/util.R
 6bbddab056390d93e1213eaf9823f559 *R/xpath.R
-4c6bf51099334023dd407112f0817479 *build/vignette.rds
+9ec71263f9d6ee375163bd5fa59f7261 *build/vignette.rds
 1038fe601603e7cf424047569bbbde7a *data/tad1.rdata
-0a05791cc7e5a489f5f299c6e5d9af5c *inst/doc/parameter-table.R
+9d881bd86bc9900a454866a813054f56 *inst/doc/parameter-table.R
 2f64e0e1d8257f3d82b0dccd801df3c8 *inst/doc/parameter-table.Rmd
-1beadadf0cf251368450e0c9a99043bc *inst/doc/parameter-table.html
+4fa711e6aadd1e3b39fa3e19ef9a5f35 *inst/doc/parameter-table.html
 f95206bf2c47cb8bc5138e8e4a056172 *inst/project/data/derived/drug.csv
 f7a00f8af96e6157cabcda41d4d7fb14 *inst/project/data/derived/drug.spec
 7ea54e49a571bb087d428af930db3f8a *inst/project/data/source/dem.csv
