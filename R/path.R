@@ -27,7 +27,10 @@ modelpath.numeric <- function(x,...)modelpath(as.character(x),...)
 
 #' Resolve A Path to a Model-related File for Character
 #' 
-#' Resolves a path to a model-related file, treating \code{x} as a model name. By default (\code{ext} is NULL) the run directory is returned.
+#' Resolves a path to a model-related file, treating \code{x} as a model name.
+#' By default (\code{ext} is NULL) the run directory is returned.
+#' As of version 0.9.2, \code{nested} can be a function of \code{ext} and \dots
+#' That returns logical.
 #' 
 #' @param x object
 #' @param ext file extension, no leading dot
@@ -44,6 +47,8 @@ modelpath.character <- function(
   nested = getOption('nested', TRUE),
   ...
 ){
+  if(!is.logical(nested))nested <- match.fun(nested)(ext, ...)
+  stopifnot(is.logical(nested))
   rundir <- if(nested) file.path(project, x) else project
   if(is.null(ext)) return(rundir)
   filename <- paste(sep='.', x, ext)
@@ -135,7 +140,8 @@ datafile.character <- function(
   if(!file_test('-f',x)) x <- modelfile(x, ...)
   control <- read.model(ctlfile,...)
   dname <- getdname(control)
-  datafile <- resolve(dname,rundir)
+  # datafile <- resolve(dname,rundir)
+  datafile <- resolve(dname, dirname(ctlfile)) # 0.9.2
   datafile <- relativizePath(datafile)
   datafile
 }
@@ -252,5 +258,51 @@ resolve <-
       file.path(dir, file)
     )
 
+#' PsN Model File is Nested
+#' Check whether a particular file extension corresponds to
+#' a file that is nested within a subdirectory
+#' using default PsN conventions.
+#' @param x character, a file extension, without dot.
+#' @param ... ignored
+#' @export
+#' @return logical
+#' @examples
+#' psn_nested('mod')
+psn_nested <- function(x, ...){
+  if(is.null(x))return(TRUE)
+  if(x %in% c('mod', 'lst')) return(FALSE)
+  return(TRUE)
+}
+
+#' Set PsN Options
+#' Sets PsN-style directory and control stream options.
+#' Supports control streams with semicolon-delimited metadata
+#' including symbol, unit, transform, and label.
+#' Expects model files to be found in nested directory,
+#' except for *.mod and *.lst.
+#' @param project character, path to project directory
+#' @param modex character, extension for model control stream (no dot)
+#' @param fields character
+#' @param nested logical, or function of file extension returning logical
+#' @param ... ignored
+#' @export
+#' @return used for side-effects (sets options 'fields' and 'nested')
+#' @family path
+#' @examples
+#' \dontrun{
+#' psn_options()
+#' }
+psn_options <- function(
+  project = 'NONMEM',
+  modex = 'mod',
+  fields = c('symbol','unit','transform','label'),
+  nested = psn_nested,
+  ...
+){
+  options(modex = modex)
+  options(project = project)
+  options(fields = fields)
+  options(nested = nested)
+}
 
 
