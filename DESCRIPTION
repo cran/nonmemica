@@ -1,7 +1,7 @@
 Package: nonmemica
 Type: Package
 Title: Create and Evaluate NONMEM Models in a Project Context
-Version: 0.9.4
+Version: 0.9.6
 Author: Tim Bergsma
 Maintainer: Tim Bergsma <bergsmat@gmail.com>
 Description: Systematically creates and modifies NONMEM(R) control streams. Harvests
@@ -13,10 +13,10 @@ LazyData: TRUE
 Imports: dplyr (>= 0.7.1), tidyr, xml2, encode, csv, spec, lazyeval,
         metaplot (>= 0.1.4), magrittr, rlang
 Suggests: pander, knitr, wrangle, rmarkdown
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-10-02 18:07:28 UTC; tim.bergsma
+Packaged: 2020-10-21 14:30:14 UTC; tim.bergsma
 Repository: CRAN
-Date/Publication: 2020-10-02 22:00:02 UTC
+Date/Publication: 2020-10-21 20:20:02 UTC
