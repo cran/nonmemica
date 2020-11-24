@@ -11,7 +11,7 @@
 
 \item{y}{data.frame}
 
-\item{...}{passed to \code{\link[dplyr]{left_join}}}
+\item{...}{passed to dplyr::left_join}
 }
 \description{
 Joins data frames safely. I.e., a left join that 

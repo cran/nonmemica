@@ -18,7 +18,7 @@ safe_join <- function(x, ...)UseMethod('safe_join')
 #' or number would have been altered by a left join.
 #' @param x data.frame
 #' @param y data.frame
-#' @param ... passed to \code{\link[dplyr]{left_join}}
+#' @param ... passed to dplyr::left_join
 #' @family safe_join
 #' @export
 #' @importFrom dplyr left_join
