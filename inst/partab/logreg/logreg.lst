@@ -1,0 +1,324 @@
+Mon 06 Feb 2023 04:38:08 PM CET
+$PROB Logistic Regression
+
+$INPUT C ID DV SEX
+
+$DATA ../Dataset.csv IGNORE=@
+
+$PRED
+LOGIT = THETA(1)+ETA(1)
+A = EXP(LOGIT)
+P = A / (1+A)
+
+IF(DV.EQ.1) Y=P
+IF(DV.EQ.0) Y=1-P
+
+$THETA
+(10) ; beta0; Intercept; /
+
+$OMEGA 
+0.0001 	; Res; Between subject variability; /
+
+$ESTIMATION MAXEVAL=9999 PRINT=5 METHOD=COND LAPLACE LIKELIHOOD NOABORT MSF=./logreg.msf
+
+$COV MATRIX=R PRINT=E
+
+$TABLE C ID DV SEX ETA1 PRED RES WRES ONEHEADER NOPRINT FILE=logreg.tab
+
+NM-TRAN MESSAGES
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+             
+ (WARNING  3) THERE MAY BE AN ERROR IN THE ABBREVIATED CODE. THE FOLLOWING
+ ONE OR MORE RANDOM VARIABLES ARE DEFINED WITH "IF" STATEMENTS THAT DO NOT
+ PROVIDE DEFINITIONS FOR BOTH THE "THEN" AND "ELSE" CASES. IF ALL
+ CONDITIONS FAIL, THE VALUES OF THESE VARIABLES WILL BE ZERO.
+  
+   Y
+
+             
+ (WARNING  13) WITH USER-WRITTEN PRED OR $PRED, NM-TRAN CANNOT APPEND THE
+ MDV DATA ITEM.
+
+License Registered to: qPharmetra
+Expiration Date:    14 JUL 2023
+Current Date:        6 FEB 2023
+Days until program expires : 158
+1NONLINEAR MIXED EFFECTS MODEL PROGRAM (NONMEM) VERSION 7.4.3
+ ORIGINALLY DEVELOPED BY STUART BEAL, LEWIS SHEINER, AND ALISON BOECKMANN
+ CURRENT DEVELOPERS ARE ROBERT BAUER, ICON DEVELOPMENT SOLUTIONS,
+ AND ALISON BOECKMANN. IMPLEMENTATION, EFFICIENCY, AND STANDARDIZATION
+ PERFORMED BY NOUS INFOSYSTEMS.
+
+ PROBLEM NO.:         1
+ Logistic Regression
+0DATA CHECKOUT RUN:              NO
+ DATA SET LOCATED ON UNIT NO.:    2
+ THIS UNIT TO BE REWOUND:        NO
+ NO. OF DATA RECS IN DATA SET:       20
+ NO. OF DATA ITEMS IN DATA SET:   4
+ ID DATA ITEM IS DATA ITEM NO.:   2
+ DEP VARIABLE IS DATA ITEM NO.:   3
+0LABELS FOR DATA ITEMS:
+ C ID DV SEX
+0FORMAT FOR DATA:
+ (4E3.0)
+
+ TOT. NO. OF OBS RECS:       20
+ TOT. NO. OF INDIVIDUALS:       20
+0LENGTH OF THETA:   1
+0DEFAULT THETA BOUNDARY TEST OMITTED:    NO
+0OMEGA HAS SIMPLE DIAGONAL FORM WITH DIMENSION:   1
+0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO
+0INITIAL ESTIMATE OF THETA:
+   0.1000E+02
+0INITIAL ESTIMATE OF OMEGA:
+ 0.1000E-03
+0COVARIANCE STEP OMITTED:        NO
+ R MATRIX SUBSTITUTED:          YES
+ S MATRIX SUBSTITUTED:           NO
+ EIGENVLS. PRINTED:             YES
+ COMPRESSED FORMAT:              NO
+ GRADIENT METHOD USED:     NOSLOW
+ SIGDIGITS ETAHAT (SIGLO):                  -1
+ SIGDIGITS GRADIENTS (SIGL):                -1
+ EXCLUDE COV FOR FOCE (NOFCOV):              NO
+ TURN OFF Cholesky Transposition of R Matrix (CHOLROFF): NO
+ KNUTHSUMOFF:                                -1
+ RESUME COV ANALYSIS (RESUME):               NO
+ SIR SAMPLE SIZE (SIRSAMPLE):              -1
+ NON-LINEARLY TRANSFORM THETAS DURING COV (THBND): 1
+ PRECONDTIONING CYCLES (PRECOND):        0
+ PRECONDTIONING TYPES (PRECONDS):        TOS
+ FORCED PRECONDTIONING CYCLES (PFCOND):0
+ PRECONDTIONING TYPE (PRETYPE):        0
+ FORCED POS. DEFINITE SETTING: (FPOSDEF):0
+0TABLES STEP OMITTED:    NO
+ NO. OF TABLES:           1
+ SEED NUMBER (SEED):    11456
+ RANMETHOD:             3U
+ MC SAMPLES (ESAMPLE):    300
+ WRES SQUARE ROOT TYPE (WRESCHOL): EIGENVALUE
+0-- TABLE   1 --
+0RECORDS ONLY:    ALL
+04 COLUMNS APPENDED:    YES
+ PRINTED:                NO
+ HEADER:                YES
+ FILE TO BE FORWARDED:   NO
+ FORMAT:                S1PE11.4
+ LFORMAT:
+ RFORMAT:
+ FIXED_EFFECT_ETAS:
+0USER-CHOSEN ITEMS:
+ C ID DV SEX ETA1
+1
+
+
+ #TBLN:      1
+ #METH: Laplacian Conditional Estimation
+
+ ESTIMATION STEP OMITTED:                 NO
+ ANALYSIS TYPE:                           POPULATION
+ NUMBER OF SADDLE POINT RESET ITERATIONS:      0
+ GRADIENT METHOD USED:               NOSLOW
+ CONDITIONAL ESTIMATES USED:              YES
+ CENTERED ETA:                            NO
+ EPS-ETA INTERACTION:                     NO
+ LAPLACIAN OBJ. FUNC.:                    YES
+ NUMERICAL 2ND DERIVATIVES:               NO
+ PRED F SET TO A LIKELIHOOD:              YES
+ NO. OF FUNCT. EVALS. ALLOWED:            9999
+ NO. OF SIG. FIGURES REQUIRED:            3
+ INTERMEDIATE PRINTOUT:                   YES
+ ESTIMATE OUTPUT TO MSF:                  YES
+ ABORT WITH PRED EXIT CODE 1:             NO
+ IND. OBJ. FUNC. VALUES SORTED:           NO
+ NUMERICAL DERIVATIVE
+       FILE REQUEST (NUMDER):               NONE
+ MAP (ETAHAT) ESTIMATION METHOD (OPTMAP):   0
+ ETA HESSIAN EVALUATION METHOD (ETADER):    0
+ INITIAL ETA FOR MAP ESTIMATION (MCETA):    0
+ SIGDIGITS FOR MAP ESTIMATION (SIGLO):      100
+ GRADIENT SIGDIGITS OF
+       FIXED EFFECTS PARAMETERS (SIGL):     100
+ NOPRIOR SETTING (NOPRIOR):                 OFF
+ NOCOV SETTING (NOCOV):                     OFF
+ DERCONT SETTING (DERCONT):                 OFF
+ FINAL ETA RE-EVALUATION (FNLETA):          ON
+ EXCLUDE NON-INFLUENTIAL (NON-INFL.) ETAS
+       IN SHRINKAGE (ETASTYPE):             NO
+ NON-INFL. ETA CORRECTION (NONINFETA):      OFF
+ RAW OUTPUT FILE (FILE): logreg.ext
+ EXCLUDE TITLE (NOTITLE):                   NO
+ EXCLUDE COLUMN LABELS (NOLABEL):           NO
+ FORMAT FOR ADDITIONAL FILES (FORMAT):      S1PE12.5
+ PARAMETER ORDER FOR OUTPUTS (ORDER):       TSOL
+ WISHART PRIOR DF INTERPRETATION (WISHTYPE):0
+ KNUTHSUMOFF:                               0
+ INCLUDE LNTWOPI:                           NO
+ INCLUDE CONSTANT TERM TO PRIOR (PRIORC):   NO
+ INCLUDE CONSTANT TERM TO OMEGA (ETA) (OLNTWOPI):NO
+ ADDITIONAL CONVERGENCE TEST (CTYPE=4)?:    NO
+ EM OR BAYESIAN METHOD USED:                 NONE
+
+
+ THE FOLLOWING LABELS ARE EQUIVALENT
+ PRED=NPRED
+ RES=NRES
+ WRES=NWRES
+ IWRS=NIWRES
+ IPRD=NIPRED
+ IRS=NIRES
+
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   160.001016119386        NO. OF FUNC. EVALS.:   4
+ CUMULATIVE NO. OF FUNC. EVALS.:        4
+ NPARAMETR:  1.0000E+01  1.0000E-04
+ PARAMETER:  1.0000E-01  1.0000E-01
+ GRADIENT:   1.5998E+03 -1.5998E-03
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   26.9205141039169        NO. OF FUNC. EVALS.:  26
+ CUMULATIVE NO. OF FUNC. EVALS.:       30
+ NPARAMETR:  4.0233E-01  1.0044E-04
+ PARAMETER:  4.0233E-03  1.0221E-01
+ GRADIENT:   1.7818E+00  6.2321E-07
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   26.9204666828527        NO. OF FUNC. EVALS.:  39
+ CUMULATIVE NO. OF FUNC. EVALS.:       69
+ NPARAMETR:  4.0547E-01  6.8479E-05
+ PARAMETER:  4.0547E-03 -8.9319E-02
+ GRADIENT:  -4.3209E-03  1.0179E-08
+
+0ITERATION NO.:   15    OBJECTIVE VALUE:   26.9204666804564        NO. OF FUNC. EVALS.:  42
+ CUMULATIVE NO. OF FUNC. EVALS.:      111
+ NPARAMETR:  4.0547E-01  1.1429E-05
+ PARAMETER:  4.0547E-03 -9.8449E-01
+ GRADIENT:  -1.3824E-03  2.3276E-10
+
+0ITERATION NO.:   20    OBJECTIVE VALUE:   26.9204666804479        NO. OF FUNC. EVALS.:  35
+ CUMULATIVE NO. OF FUNC. EVALS.:      146
+ NPARAMETR:  4.0547E-01  7.5973E-06
+ PARAMETER:  4.0547E-03 -1.1887E+00
+ GRADIENT:  -1.9013E-04  6.7247E-11
+
+0ITERATION NO.:   25    OBJECTIVE VALUE:   26.9204666803732        NO. OF FUNC. EVALS.:  47
+ CUMULATIVE NO. OF FUNC. EVALS.:      193
+ NPARAMETR:  4.0547E-01  1.5190E-08
+ PARAMETER:  4.0547E-03 -4.2919E+00
+ GRADIENT:  -2.4539E-03  1.6556E-11
+ NUMSIGDIG:         6.6         2.4
+
+ #TERM:
+0MINIMIZATION TERMINATED
+ DUE TO ROUNDING ERRORS (ERROR=134)
+ NO. OF FUNCTION EVALUATIONS USED:      193
+ NO. OF SIG. DIGITS IN FINAL EST.:  2.4
+
+ ETABAR IS THE ARITHMETIC MEAN OF THE ETA-ESTIMATES,
+ AND THE P-VALUE IS GIVEN FOR THE NULL HYPOTHESIS THAT THE TRUE MEAN IS 0.
+
+ ETABAR:        -2.8521E-15
+ SE:             1.6783E-09
+ N:                      20
+
+ P VAL.:         1.0000E+00
+
+ ETASHRINKSD(%)  9.9994E+01
+ ETASHRINKVR(%)  1.0000E+02
+ EBVSHRINKSD(%)  9.9994E+01
+ EBVSHRINKVR(%)  1.0000E+02
+ EPSSHRINKSD(%)  1.0000E+02
+ EPSSHRINKVR(%)  1.0000E+02
+
+  
+ TOTAL DATA POINTS NORMALLY DISTRIBUTED (N):            0
+ N*LOG(2PI) CONSTANT TO OBJECTIVE FUNCTION:    0.0000000000000000     
+ OBJECTIVE FUNCTION VALUE WITHOUT CONSTANT:    26.920466680373188     
+ OBJECTIVE FUNCTION VALUE WITH CONSTANT:       26.920466680373188     
+ REPORTED OBJECTIVE FUNCTION DOES NOT CONTAIN CONSTANT
+  
+ TOTAL EFFECTIVE ETAS (NIND*NETA):                            20
+  
+ #TERE:
+ Elapsed estimation  time in seconds:     0.02
+ Elapsed postprocess time in seconds:     0.01
+1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ************************************************************************************************************************
+ ********************                                                                                ********************
+ ********************                         LAPLACIAN CONDITIONAL ESTIMATION                       ********************
+ #OBJT:**************                       MINIMUM VALUE OF OBJECTIVE FUNCTION                      ********************
+ ********************                                                                                ********************
+ ************************************************************************************************************************
+ 
+
+
+
+
+
+ #OBJV:********************************************       26.920       **************************************************
+1
+ ************************************************************************************************************************
+ ********************                                                                                ********************
+ ********************                         LAPLACIAN CONDITIONAL ESTIMATION                       ********************
+ ********************                             FINAL PARAMETER ESTIMATE                           ********************
+ ********************                                                                                ********************
+ ************************************************************************************************************************
+ 
+
+
+ THETA - VECTOR OF FIXED EFFECTS PARAMETERS   *********
+
+
+         TH 1     
+ 
+         4.05E-01
+ 
+
+
+ OMEGA - COV MATRIX FOR RANDOM EFFECTS - ETAS  ********
+
+
+         ETA1     
+ 
+ ETA1
++        1.53E-08
+ 
+1
+
+
+ OMEGA - CORR MATRIX FOR RANDOM EFFECTS - ETAS  *******
+
+
+         ETA1     
+ 
+ ETA1
++        1.24E-04
+ 
+ Elapsed finaloutput time in seconds:     0.00
+ #CPUT: Total CPU Time in Seconds,        0.033
+Stop Time:
+Mon 06 Feb 2023 04:38:09 PM CET
