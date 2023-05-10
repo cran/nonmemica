@@ -2,47 +2,21 @@
 % Please edit documentation in R/xpath.R
 \name{xpath}
 \alias{xpath}
-\alias{xpath.default}
-\alias{xpath.xml_document}
 \title{Evaluate Xpath Expression}
 \usage{
 xpath(x, ...)
-
-\method{xpath}{default}(x, ...)
-
-\method{xpath}{xml_document}(x, xpath, ...)
 }
 \arguments{
 \item{x}{xml_document}
 
 \item{...}{passed arguments}
-
-\item{xpath}{xpath expression to evaluate}
-}
-\value{
-vector
-
-vector
 }
 \description{
 Evaluates an xpath expression.
-
-Coerces x to xml_document and evaluates.
-
-Evaluates an xpath expression for a given document.
 }
 \details{
 The resulting nodeset is scavenged for text, and coerced to best of numeric or character.
-
-The resulting nodeset is scavenged for text, and coerced to best of numeric or character.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{xpath(default)}: default method
-
-\item \code{xpath(xml_document)}: xml_document method
-
-}}
 \examples{
 library(magrittr)
 options(project = system.file('project/model',package='nonmemica'))
@@ -50,15 +24,10 @@ options(project = system.file('project/model',package='nonmemica'))
 }
 \seealso{
 Other xpath: 
+\code{\link{as.xml_document.character}()},
 \code{\link{as.xml_document.numeric}()},
-\code{\link{as.xml_document}()}
-
-Other xpath: 
-\code{\link{as.xml_document.numeric}()},
-\code{\link{as.xml_document}()}
-
-Other xpath: 
-\code{\link{as.xml_document.numeric}()},
-\code{\link{as.xml_document}()}
+\code{\link{as.xml_document}()},
+\code{\link{xpath.default}()},
+\code{\link{xpath.xml_document}()}
 }
 \concept{xpath}

@@ -7,9 +7,9 @@
 \method{as.xml_document}{numeric}(x, ...)
 }
 \arguments{
-\item{x}{object of dispatch}
+\item{x}{numerc}
 
-\item{...}{arguments to methods}
+\item{...}{passed arguments}
 }
 \value{
 xml_document
@@ -19,7 +19,10 @@ Coerces numeric to xml_document
 }
 \seealso{
 Other xpath: 
+\code{\link{as.xml_document.character}()},
 \code{\link{as.xml_document}()},
+\code{\link{xpath.default}()},
+\code{\link{xpath.xml_document}()},
 \code{\link{xpath}()}
 }
 \concept{xpath}
