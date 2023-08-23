@@ -1,4 +1,4 @@
-ff4b5f775d3492d60387871c8f64eed9 *DESCRIPTION
+293d3f4c9182f5fc6722c2909e8873e0 *DESCRIPTION
 581c0255dea4ad2300aaf3e66cd3eef7 *NAMESPACE
 c3dccb3d07685ff9906f5bf67272d893 *R/bootstrap.R
 8e31348479834cf84c9b1ada69f5012a *R/canonical.R
@@ -8,20 +8,20 @@ f334389d90cf68a93b64c68490aae5ca *R/getset.R
 d9e9fbd535f03190bcb7f9ab54e53787 *R/init.R
 399ffd2e76d32382e00982f23a73c1fe *R/likebut.R
 03a2d0b5211b5789a792001ce83b0e40 *R/model.R
-5ac3925f0eddc6c48dad5c7c83302b58 *R/nonmemica.R
+b852f25d6fee554a2efdc414d9042e52 *R/nonmemica.R
 0ab66f55985648bcc506068fa991a774 *R/partab.R
-b95586fd13968a98919883f7b5656710 *R/path.R
+09ef18f5c6a1bf541544c63dc0729b11 *R/path.R
 32f39d9e3a2643c14820219a6b9eb997 *R/runrecord.R
 78d21b3465289ec4aae099d5bd4a6c3a *R/safejoin.R
 4f2e6ee9d3b9de45a50352c81bd3754c *R/superset.R
 afe4d26aa96bc749a02eaea4e3f3844e *R/tad.R
-9b3dd6ba1d42866ffa175f7fcfdda99c *R/util.R
+dc96997445cd7800a82c2f167d9b6e28 *R/util.R
 97cc423fd7cb54853463e4a0d456da07 *R/xpath.R
 cd863304a19aeb3dced901b2f68f4900 *build/vignette.rds
 1038fe601603e7cf424047569bbbde7a *data/tad1.rdata
 9d881bd86bc9900a454866a813054f56 *inst/doc/parameter-table.R
 1de472bbae4939ed44f3e04d694361e9 *inst/doc/parameter-table.Rmd
-e1febe3dd01ef7b0bb3327cd31e4669c *inst/doc/parameter-table.html
+a9c171c7a74b24239854285c7c80f9a8 *inst/doc/parameter-table.html
 f95206bf2c47cb8bc5138e8e4a056172 *inst/project/data/derived/drug.csv
 f7a00f8af96e6157cabcda41d4d7fb14 *inst/project/data/derived/drug.spec
 7ea54e49a571bb087d428af930db3f8a *inst/project/data/source/dem.csv
@@ -78,7 +78,7 @@ b36f71fd386a4af05d3e92cf1dc33e45 *inst/project/model/2007/2007.xml
 fa96eae26ef30a14d185e4cdf519f669 *inst/project/model/2007/mod.tab
 70c72d2ed0dba9e55e897eaf67c7e146 *inst/project/model/2007/mod2.tab
 2475b747ab64a69a8f664a8835d6e0c3 *man/absolute.Rd
-77f982d8b3a61ecc4fa0fc1fe1691590 *man/as.best.Rd
+32fdf6c594555699bed405a33dfb005b *man/as.best.Rd
 55ab348bf42dca3df851375b46bb2919 *man/as.best.default.Rd
 fc3ba6c593f66b18a4d6c8634e824e30 *man/as.bootstrap.Rd
 5cb20b4da90706be42ff33724d7ca22c *man/as.bootstrap.bootstrap.Rd
@@ -213,7 +213,7 @@ dffc6783ee75a6d9696adca21d5a7189 *man/nms_psn.Rd
 5811fd9d1772ffc506fe18b17f574877 *man/nms_psn.character.Rd
 464cebd415825f575f083779be51ce57 *man/nms_psn.model.Rd
 d8c7c50fef3259ef5e110ddd5c9c6dd5 *man/nms_psn.numeric.Rd
-1e6eee4acd769c38cd977347448b5cbb *man/nonmemica.Rd
+3b2af0f38f1c98d819182b23dba3c159 *man/nonmemica.Rd
 00f8bbc082a3116b09f2ad18effca5fe *man/num_parameters.Rd
 734b0fbe833b2edbf1fa6124d31abc02 *man/num_parameters.default.Rd
 1ca15416e5e4277ad69cf53b9fb115d5 *man/offdiag.Rd
@@ -244,7 +244,7 @@ c2a692d718859fc6bf6cbf2c18e906da *man/problem.character.Rd
 fdefb019b9a939de518f4b651c55d59b *man/problem.numeric.Rd
 818f380a1af176b60808b0901909862e *man/problem_.Rd
 78b0da2801004606883a05bf9edabfea *man/psn_nested.Rd
-7146557d81ff3c1e8127885f40a88d89 *man/psn_options.Rd
+c96dbc73939a2c0f03a9880a0fcf9538 *man/psn_options.Rd
 911f548d9ef16c222d6785f18415b8f5 *man/read.model.Rd
 a8502fa9f3f42a777f96fb9c65ec8391 *man/relativizePath.Rd
 4bd6cdf54efc885927767ec6b5983e58 *man/resolve.Rd
