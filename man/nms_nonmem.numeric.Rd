@@ -2,7 +2,7 @@
 % Please edit documentation in R/canonical.R
 \name{nms_nonmem.numeric}
 \alias{nms_nonmem.numeric}
-\title{Generate NONMEM-style Names for Numeric}
+\title{Generate NONMEM Names for Numeric}
 \usage{
 \method{nms_nonmem}{numeric}(x, ...)
 }
@@ -12,13 +12,32 @@
 \item{...}{passed arguments}
 }
 \description{
-Generates NONMEM-style names for numeric by coercing to character.
+Generates NONMEM names for numeric by coercing to character.
 }
 \seealso{
-Other nms_nonmem: 
+Other nms: 
+\code{\link{as_nms_canonical}()},
+\code{\link{as_nms_nonmem}()},
+\code{\link{as_nms_pmx}()},
+\code{\link{as_nms_psn}()},
+\code{\link{nms_canonical.character}()},
+\code{\link{nms_canonical.model}()},
+\code{\link{nms_canonical.nms_nonmem}()},
+\code{\link{nms_canonical.nms_pmx}()},
+\code{\link{nms_canonical.numeric}()},
+\code{\link{nms_canonical}()},
 \code{\link{nms_nonmem.character}()},
 \code{\link{nms_nonmem.model}()},
-\code{\link{nms_nonmem}()}
+\code{\link{nms_nonmem.nms_canonical}()},
+\code{\link{nms_nonmem.nms_pmx}()},
+\code{\link{nms_nonmem}()},
+\code{\link{nms_pmx.nms_canonical}()},
+\code{\link{nms_pmx.nms_nonmem}()},
+\code{\link{nms_pmx}()},
+\code{\link{nms_psn.character}()},
+\code{\link{nms_psn.model}()},
+\code{\link{nms_psn.numeric}()},
+\code{\link{nms_psn}()}
 }
-\concept{nms_nonmem}
+\concept{nms}
 \keyword{internal}
